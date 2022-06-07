@@ -7,6 +7,7 @@ Route::get('/', 'SiteController@home')->name('site.home');
 
 Auth::routes();
 
-Route::middleware('auth')->group(function () {
-    Route::get('/admin', 'AdminController@dashboard')->name('admin.dashboard');
+Route::middleware('auth')->prefix('/admin')->group(function () {
+    Route::get('/', 'AdminController@dashboard')->name('admin.dashboard');
+    Route::get('/saldo', 'BalanceController@balance')->name('admin.balance');
 });
