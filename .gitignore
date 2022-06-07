@@ -24,6 +24,7 @@ docker-compose.override.yml
 /public/storage
 /public/dist
 /public/mix-manifest.json
+/public/assets
 
 # Docker
 /docker/data
