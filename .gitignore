@@ -1,0 +1,29 @@
+# Project files
+.env
+.env.backup
+.phpunit.result.cache
+.vagrant
+Homestead.json
+Homestead.yaml
+npm-debug.log
+yarn-error.log
+docker-compose.override.yml
+
+# Project folders
+/.idea
+/.vscode
+/.vs
+/storage/*.key
+
+# Node / Vendor
+/node_modules
+/vendor
+
+# Public
+/public/hot
+/public/storage
+/public/dist
+/public/mix-manifest.json
+
+# Docker
+/docker/data

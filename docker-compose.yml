@@ -1,0 +1,68 @@
+version: "3.8"
+
+services:
+  nginx:
+    image: nginx:1.19
+    container_name: "nginx"
+    volumes:
+      - ./:/var/www
+      - ./docker/config/nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./docker/config/nginx/conf.d/default.conf:/etc/nginx/conf.d/default.conf
+      - ./docker/config/nginx/ssl/server-key.pem:/etc/nginx/ssl/server-key.pem
+      - ./docker/config/nginx/ssl/server.pem:/etc/nginx/ssl/server.pem
+      - ./docker/data/nginx/logs:/var/log/nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    # restart: always
+    depends_on:
+      - php
+    networks:
+      - sistema_saldo_network
+
+  mysql:
+    image: mysql:8.0
+    container_name: "mysql"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - ./docker/data/mysql:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    # restart: always
+    networks:
+      - sistema_saldo_network
+
+  php:
+    image: thiagotrancoso/php7.4-fpm-dev:v2
+    container_name: "php"
+    volumes:
+      - ./:/var/www
+      - ./docker/config/php/conf.d:/usr/local/etc/php/conf.d
+    links:
+      - mysql
+    # restart: always
+    working_dir: /var/www
+    depends_on:
+      - mysql
+    networks:
+      - sistema_saldo_network
+
+  phpmyadmin:
+    image: phpmyadmin:5.1
+    container_name: phpmyadmin
+    environment:
+      - HIDE_PHP_VERSION=true
+    depends_on:
+      - mysql
+    links:
+      - "mysql:db"
+    # restart: unless-stopped
+    ports:
+      - 8080:80
+    networks:
+      - sistema_saldo_network
+
+networks:
+  sistema_saldo_network:
+    driver: bridge
