@@ -28,6 +28,7 @@
 
             @if ($amount > 0)
                 <a href="{{ route('admin.withdraw') }}" class="btn btn-danger">Sacar</a>
+                <a href="{{ route('admin.transfer') }}" class="btn btn-info">Transferir</a>
             @endif
         </div>
 

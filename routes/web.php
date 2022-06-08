@@ -16,4 +16,7 @@ Route::middleware('auth')->prefix('/admin')->group(function () {
 
     Route::get('/saque', 'WithdrawController@withdraw')->name('admin.withdraw');
     Route::post('/saque', 'WithdrawController@store')->name('admin.withdraw.store');
+
+    Route::get('/transferir', 'TransferController@transfer')->name('admin.transfer');
+    Route::post('/transferir', 'TransferController@store')->name('admin.transfer.store');
 });
