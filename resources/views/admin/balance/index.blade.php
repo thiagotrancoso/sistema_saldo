@@ -18,7 +18,7 @@
 @section('content-main')
     <div class="box">
         <div class="box-header">
-            <a href="" class="btn btn-primary">Depositar</a>
+            <a href="{{ route('admin.balance.deposit') }}" class="btn btn-primary">Depositar</a>
             <a href="" class="btn btn-danger">Sacar</a>
         </div>
 

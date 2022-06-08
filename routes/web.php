@@ -10,4 +10,6 @@ Auth::routes();
 Route::middleware('auth')->prefix('/admin')->group(function () {
     Route::get('/', 'AdminController@dashboard')->name('admin.dashboard');
     Route::get('/saldo', 'BalanceController@balance')->name('admin.balance');
+    Route::get('/deposito', 'DepositController@deposit')->name('admin.balance.deposit');
+    Route::post('/deposito', 'DepositController@store')->name('admin.deposit.store');
 });
