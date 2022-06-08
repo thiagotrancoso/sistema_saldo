@@ -2,10 +2,14 @@
 
 namespace App\Services\Deposit;
 
+use Illuminate\Support\Facades\DB;
+
 class DepositService
 {
     public function deposit($value)
     {
+        DB::beginTransaction();
+
         $balance = auth()->user()->balance()->firstOrCreate([]);
         $totalBefore = $balance->amount ?? 0;
         $balance->amount += number_format($value, 2, '.', '');
@@ -20,11 +24,15 @@ class DepositService
         ]);
 
         if ($result && $savedHistoric) {
+            DB::commit();
+
             return [
                 'success' => true,
                 'message' => 'Depósito feito com sucesso.'
             ];
         }
+
+        DB::rollback();
 
         return [
             'success' => false,
