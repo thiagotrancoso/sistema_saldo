@@ -16,6 +16,14 @@
 @endsection
 
 @section('content-main')
+    @if ($errors->any())
+        <div class="alert alert-warning">
+            @foreach ($errors->all() as $error)
+                <p>{{ $error }}</p>
+            @endforeach
+        </div>
+    @endif
+
     <div class="box">
         <div class="box-body">
             <form method="post" action="{{ route('admin.deposit.store') }}">
