@@ -9,7 +9,7 @@
         </h1>
 
         <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+            <li><a href="{{ route('admin.dashboard') }}"><i class="fa fa-dashboard"></i> Dashboard</a></li>
             <li class="active">Saldo</li>
         </ol>
     </section>
@@ -25,7 +25,10 @@
     <div class="box">
         <div class="box-header">
             <a href="{{ route('admin.balance.deposit') }}" class="btn btn-primary">Depositar</a>
-            <a href="" class="btn btn-danger">Sacar</a>
+
+            @if ($amount > 0)
+                <a href="{{ route('admin.withdraw') }}" class="btn btn-danger">Sacar</a>
+            @endif
         </div>
 
         <div class="box-body">
