@@ -27,7 +27,7 @@
                 <div class="col-md-6">
                     <div class="small-box bg-green">
                         <div class="inner">
-                            <h3>R$ 90,00</h3>
+                            <h3>R$ {{ $amount }}</h3>
                         </div>
 
                         <div class="icon">

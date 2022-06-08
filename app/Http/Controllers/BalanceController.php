@@ -8,6 +8,11 @@ class BalanceController extends Controller
 {
     public function balance()
     {
-        return view('admin.balance.index');
+        $balance = auth()->user()->balance;
+        $amount = $balance->amount ?? 0;
+
+        return view('admin.balance.index', [
+            'amount' => number_format($amount, 2, ',', '.')
+        ]);
     }
 }
