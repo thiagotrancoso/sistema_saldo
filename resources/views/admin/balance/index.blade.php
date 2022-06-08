@@ -16,6 +16,12 @@
 @endsection
 
 @section('content-main')
+    @if(session('message-alert'))
+        <div class="alert alert-{{ session('message-alert.type') }}">
+            {{ session('message-alert.message') }}
+        </div>
+    @endif
+
     <div class="box">
         <div class="box-header">
             <a href="{{ route('admin.balance.deposit') }}" class="btn btn-primary">Depositar</a>

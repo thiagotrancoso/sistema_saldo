@@ -26,17 +26,17 @@ class DepositService
         if ($result && $savedHistoric) {
             DB::commit();
 
-            return [
-                'success' => true,
+            return redirect()->route('admin.balance')->with('message-alert', [
+                'type' => 'success',
                 'message' => 'Depósito feito com sucesso.'
-            ];
+            ]);
         }
 
         DB::rollback();
 
-        return [
-            'success' => false,
+        return back()->with('message-alert', [
+            'type' => 'error',
             'message' => 'Não foi possível fazer o depósito.'
-        ];
+        ]);
     }
 }

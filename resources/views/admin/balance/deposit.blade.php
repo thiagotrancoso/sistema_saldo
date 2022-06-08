@@ -24,6 +24,12 @@
         </div>
     @endif
 
+    @if(session('message-alert'))
+        <div class="alert alert-{{ session('message-alert.type') }}">
+            {{ session('message-alert.message') }}
+        </div>
+    @endif
+
     <div class="box">
         <div class="box-body">
             <form method="post" action="{{ route('admin.deposit.store') }}">
