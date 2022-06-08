@@ -19,4 +19,6 @@ Route::middleware('auth')->prefix('/admin')->group(function () {
 
     Route::get('/transferir', 'TransferController@transfer')->name('admin.transfer');
     Route::post('/transferir', 'TransferController@store')->name('admin.transfer.store');
+
+    Route::get('/historico', 'HistoricController@index')->name('admin.historic.index');
 });

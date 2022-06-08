@@ -2,7 +2,7 @@
     <section class="sidebar">
         <ul class="sidebar-menu" data-widget="tree">
             <li class="header">MENU</li>
-            
+
             <li class="active">
                 <a href="pages/widgets.html">
                     <i class="fa fa-dashboard"></i> <span>Dashboard</span>
@@ -21,7 +21,7 @@
                         <a href="{{ route('admin.balance') }}"><i class="fa fa-circle-o"></i> Saldo</a>
                     </li>
                     <li>
-                        <a href="index2.html"><i class="fa fa-circle-o"></i> Histórico</a>
+                        <a href="{{ route('admin.historic.index') }}"><i class="fa fa-circle-o"></i> Histórico</a>
                     </li>
                 </ul>
             </li>
