@@ -44,5 +44,9 @@
                 </tbody>
             </table>
         </div>
+
+        <div class="box-footer">
+            {!! $historics->links() !!}
+        </div>
     </div>
 @endsection
