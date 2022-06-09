@@ -15,6 +15,44 @@
 
 @section('content-main')
     <div class="box">
+        <form method="post" action="{{ route('admin.historic.search') }}" class="form-inline">
+            {!! csrf_field() !!}
+
+            <div class="box-body">
+                <div class="form-group">
+                    <label for="id">ID</label>
+                    <div class="input-group">
+                        <input type="text" name="id" id="id" class="form-control">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="date">Data</label>
+                    <div class="input-group">
+                        <input type="date" name="date" id="date" class="form-control">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="type">Tipo</label>
+                    <div class="input-group">
+                        <select name="type" id="type" class="form-control">
+                            <option value=""></option>
+                            @foreach ($types as $key => $type)
+                                <option value="{{ $key }}">{{ $type }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="box-footer">
+                <button type="submit" class="btn btn-primary">Pesquisar</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="box">
         <div class="box-body">
             <table class="table table-hover">
                 <thead>

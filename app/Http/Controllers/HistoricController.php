@@ -12,7 +12,13 @@ class HistoricController extends Controller
         $historics = auth()->user()->historics()->with('user')->paginate(2);
 
         return view('admin.historic.index', [
-            'historics' => $historics
+            'historics' => $historics,
+            'types' => identify_type_transaction()
         ]);
+    }
+
+    public function search(Request $request)
+    {
+        return $request->all();
     }
 }
