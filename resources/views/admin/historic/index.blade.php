@@ -15,7 +15,7 @@
 
 @section('content-main')
     <div class="box">
-        <form method="post" action="{{ route('admin.historic.search') }}" class="form-inline">
+        <form method="get" action="{{ route('admin.historic.search') }}" class="form-inline">
             {!! csrf_field() !!}
 
             <div class="box-body">
@@ -84,7 +84,11 @@
         </div>
 
         <div class="box-footer">
-            {!! $historics->links() !!}
+            @if (!empty($inputs))
+                {!! $historics->appends($inputs)->links() !!}
+            @else
+                {!! $historics->links() !!}
+            @endif
         </div>
     </div>
 @endsection
