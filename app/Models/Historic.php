@@ -26,4 +26,9 @@ class Historic extends Model
     {
         return $this->belongsTo(User::class, 'user_id_transaction');
     }
+
+    public function scopeUserAuth($query)
+    {
+        return $query->where('user_id', auth()->user()->id);
+    }
 }

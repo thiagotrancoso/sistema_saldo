@@ -20,7 +20,10 @@ class HistoricService
             if (!empty($inputs['type'])) {
                 $query->where('type', $inputs['type']);
             }
-        })->paginate(2);
+        })
+            ->userAuth()
+            ->with('user')
+            ->paginate(2);
 
         return view('admin.historic.index', [
             'historics' => $resultSearch,
