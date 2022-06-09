@@ -9,6 +9,7 @@ Auth::routes();
 
 Route::middleware('auth')->prefix('/admin')->group(function () {
     Route::get('/', 'AdminController@dashboard')->name('admin.dashboard');
+
     Route::get('/saldo', 'BalanceController@balance')->name('admin.balance');
 
     Route::get('/deposito', 'DepositController@deposit')->name('admin.balance.deposit');
@@ -22,4 +23,9 @@ Route::middleware('auth')->prefix('/admin')->group(function () {
 
     Route::get('/historico', 'HistoricController@index')->name('admin.historic.index');
     Route::get('/historico/search', 'HistoricController@search')->name('admin.historic.search');
+});
+
+Route::middleware('auth')->group(function () {
+    Route::get('/meu-perfil', 'UserController@profile')->name('site.profile');
+    Route::put('/meu-perfil', 'UserController@update')->name('site.profile.update');
 });
