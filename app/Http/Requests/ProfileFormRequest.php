@@ -23,11 +23,13 @@ class ProfileFormRequest extends FormRequest
      */
     public function rules()
     {
+        $authUserId = auth()->user()->id;
+
         return [
             'name'     => 'required',
-            'email'    => 'required|email:filter',
+            'email'    => "required|email:filter|unique:users,email,{$authUserId}",
             'password' => 'nullable',
-            'image'    => 'nullable'
+            'image'    => 'nullable|image'
         ];
     }
 }

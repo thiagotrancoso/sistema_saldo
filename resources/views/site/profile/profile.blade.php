@@ -55,6 +55,10 @@
                     <label for="image">Imagem</label>
                     <input type="file" name="image" id="image" class="form-control">
                 </div>
+
+                @if ($user->image)
+                    <img src="{{ $user->image }}" style="width: 100px;">
+                @endif
             </div>
 
             <div class="box-footer">
