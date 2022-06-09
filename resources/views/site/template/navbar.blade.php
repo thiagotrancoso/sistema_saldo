@@ -2,7 +2,7 @@
     <nav class="navbar navbar-static-top">
         <div class="container">
             <div class="navbar-header">
-                <a href="../../index2.html" class="navbar-brand">Sistema Saldo</a>
+                <a href="{{ route('site.home') }}" class="navbar-brand">Sistema Saldo</a>
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
                     <i class="fa fa-bars"></i>
                 </button>
