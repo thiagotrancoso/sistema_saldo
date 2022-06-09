@@ -1,4 +1,4 @@
-@extends('admin.partials.master')
+@extends('admin.template.master')
 
 @section('title', 'Admin | Transferir')
 

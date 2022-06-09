@@ -26,7 +26,7 @@ class DepositService
         if ($result && $savedHistoric) {
             DB::commit();
 
-            return redirect()->route('admin.balance')->with('message-alert', [
+            return redirect()->route('admin.financial.balance')->with('message-alert', [
                 'type' => 'success',
                 'message' => 'Depósito feito com sucesso.'
             ]);

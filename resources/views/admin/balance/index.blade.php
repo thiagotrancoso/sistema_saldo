@@ -1,4 +1,4 @@
-@extends('admin.partials.master')
+@extends('admin.template.master')
 
 @section('title', 'Admin | Saldo')
 
@@ -24,7 +24,7 @@
 
     <div class="box">
         <div class="box-header">
-            <a href="{{ route('admin.balance.deposit') }}" class="btn btn-primary">Depositar</a>
+            <a href="{{ route('admin.financial.balance.deposit') }}" class="btn btn-primary">Depositar</a>
 
             @if ($amount > 0)
                 <a href="{{ route('admin.withdraw') }}" class="btn btn-danger">Sacar</a>

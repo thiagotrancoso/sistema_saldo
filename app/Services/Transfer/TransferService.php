@@ -69,7 +69,7 @@ class TransferService
         if ($senderWithdraw && $receiverDeposit && $senderSavedHistoric && $receiverSavedHistoric) {
             DB::commit();
 
-            return redirect()->route('admin.balance')->with('message-alert', [
+            return redirect()->route('admin.financial.balance')->with('message-alert', [
                 'type'    => 'success',
                 'message' => 'Transferência feita com sucesso.'
             ]);

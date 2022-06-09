@@ -35,9 +35,9 @@
 
     <body class="hold-transition skin-blue sidebar-mini">
         <div class="wrapper">
-            @include('admin.partials.navbar')
+            @include('admin.template.navbar')
 
-            @include('admin.partials.sidebar')
+            @include('admin.template.sidebar')
 
             <div class="content-wrapper">
                 @yield('content-header')
@@ -47,7 +47,7 @@
                 </section>
             </div>
 
-            @include('admin.partials.footer')
+            @include('admin.template.footer')
         </div>
 
         <!-- jQuery 3 -->

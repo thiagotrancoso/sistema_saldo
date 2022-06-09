@@ -34,7 +34,7 @@ class WithdrawService
         if ($result && $savedHistoric) {
             DB::commit();
 
-            return redirect()->route('admin.balance')->with('message-alert', [
+            return redirect()->route('admin.financial.balance')->with('message-alert', [
                 'type' => 'success',
                 'message' => 'Saque feito com sucesso.'
             ]);
