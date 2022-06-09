@@ -11,26 +11,26 @@ class TransferService
     {
         $inputs['value'] = isset($inputs['value']) ? floatval($inputs['value']) : 0;
 
-        $recipient = User::where('email', $inputs['sender'])->first();
+        $receiver = User::where('email', $inputs['sender'])->first();
 
-        if (!$recipient) {
+        if (!$receiver) {
             return back()->with('message-alert', [
                 'type' => 'error',
                 'message' => 'Usuário destino não encontrado'
             ]);
         }
 
-        if (auth()->user()->id === $recipient->id) {
+        if (auth()->user()->id === $receiver->id) {
             return back()->with('message-alert', [
                 'type' => 'error',
                 'message' => 'Não é posssível fazer uma transferência para si mesmo.'
             ]);
         }
 
-        $balance = auth()->user()->balance;
-        $currentBalance = $balance->amount ?? 0;
+        $senderBalance = auth()->user()->balance;
+        $senderCurrentBalance = $senderBalance->amount ?? 0;
 
-        if ($currentBalance < $inputs['value']) {
+        if ($senderCurrentBalance < $inputs['value']) {
             return back()->with('message-alert', [
                 'type' => 'error',
                 'message' => 'Saldo insuficiente para transferência.'
@@ -39,34 +39,34 @@ class TransferService
 
         DB::beginTransaction();
 
-        $totalBefore = $currentBalance;
-        $balance->amount -= number_format($inputs['value'], 2, '.', '');
-        $withdraw = $balance->save();
+        $senderTotalBefore = $senderCurrentBalance;
+        $senderBalance->amount -= number_format($inputs['value'], 2, '.', '');
+        $senderWithdraw = $senderBalance->save();
 
-        $savedHistoric = auth()->user()->historics()->create([
+        $senderSavedHistoric = auth()->user()->historics()->create([
             'type'                => 'T',
             'amount'              => $inputs['value'],
-            'total_before'        => $totalBefore,
-            'total_after'         => $balance->amount,
-            'user_id_transaction' => $recipient->id,
+            'total_before'        => $senderTotalBefore,
+            'total_after'         => $senderBalance->amount,
+            'user_id_transaction' => $receiver->id,
             'date'                => date('Y-m-d')
         ]);
 
-        $recipientBalance = $recipient->balance()->firstOrCreate([]);
-        $recipientTotalBefore = $recipientBalance->amount ?? 0;
-        $recipientBalance->amount += number_format($inputs['value'], 2, '.', '');
-        $recipientDeposit = $recipientBalance->save();
+        $receiverBalance = $receiver->balance()->firstOrCreate([]);
+        $receiverTotalBefore = $receiverBalance->amount ?? 0;
+        $receiverBalance->amount += number_format($inputs['value'], 2, '.', '');
+        $receiverDeposit = $receiverBalance->save();
 
-        $recipientSavedHistoric = $recipient->historics()->create([
+        $receiverSavedHistoric = $receiver->historics()->create([
             'type'                => 'I',
             'amount'              => $inputs['value'],
-            'total_before'        => $recipientTotalBefore,
-            'total_after'         => $recipientBalance->amount,
+            'total_before'        => $receiverTotalBefore,
+            'total_after'         => $receiverBalance->amount,
             'user_id_transaction' => auth()->user()->id,
             'date'                => date('Y-m-d')
         ]);
 
-        if ($withdraw && $savedHistoric && $recipientDeposit && $recipientSavedHistoric) {
+        if ($senderWithdraw && $receiverDeposit && $senderSavedHistoric && $receiverSavedHistoric) {
             DB::commit();
 
             return redirect()->route('admin.balance')->with('message-alert', [
