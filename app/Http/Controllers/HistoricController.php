@@ -9,7 +9,7 @@ class HistoricController extends Controller
 {
     public function index()
     {
-        $historics = auth()->user()->historics()->get();
+        $historics = auth()->user()->historics()->with('user')->get();
 
         return view('admin.historic.index', [
             'historics' => $historics
