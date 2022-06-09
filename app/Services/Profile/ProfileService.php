@@ -15,6 +15,10 @@ class ProfileService
             $dataToUpdate['password'] = bcrypt($inputs['password']);
         }
 
+        if (!empty($inputs['image']) && $inputs['image']->isValid()) {
+            $dataToUpdate['image'] = $inputs['image']->store('public/users');
+        }
+
         $userUpdated = auth()->user()->update($dataToUpdate);
 
         if ($userUpdated) {

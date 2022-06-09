@@ -31,7 +31,7 @@
     @endif
 
     <div class="box">
-        <form method="post" action="{{ route('site.profile.update') }}">
+        <form method="post" action="{{ route('site.profile.update') }}" enctype="multipart/form-data">
             {!! csrf_field() !!}
             {!! method_field('put') !!}
 
