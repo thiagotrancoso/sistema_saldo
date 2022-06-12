@@ -80,7 +80,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Sistema simples de saldo
+                    Sistema de saldo
                 </div>
             </div>
         </div>
